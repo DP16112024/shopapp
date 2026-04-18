@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require('../models/Product');
 const { protect, adminOnly } = require('../middleware/authMiddleware');
 
-router.post('/seed', async (req, res) => {
+router.get('/seed', async (req, res) => {
   try {
     await Product.deleteMany();
     const products = [
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
     const { category, search } = req.query;
     const filter = {};
     if (category) filter.category = category;
-    if (search)   filter.name = { $regex: search, $options: 'i' };
+    if (search) filter.name = { $regex: search, $options: 'i' };
     const products = await Product.find(filter);
     res.json(products);
   } catch (err) { res.status(500).json({ message: err.message }); }

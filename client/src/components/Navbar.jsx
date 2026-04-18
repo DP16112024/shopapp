@@ -4,7 +4,6 @@ import { useAuth } from '../context/AuthContext';
 export default function Navbar() {
   const { userInfo, logout } = useAuth();
   const navigate = useNavigate();
-
   const handleLogout = () => { logout(); navigate('/login'); };
 
   return (
@@ -14,28 +13,19 @@ export default function Navbar() {
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       position: 'sticky', top: 0, zIndex: 100,
     }}>
-      <Link to="/" style={{ fontSize: 20, fontWeight: 700, color: '#4f46e5' }}>
-        ShopMERN
-      </Link>
+      <Link to="/" style={{ fontSize: 20, fontWeight: 700, color: '#4f46e5' }}>ShopMERN</Link>
       <div style={{ display: 'flex', gap: 20, alignItems: 'center', fontSize: 14 }}>
         <Link to="/cart" style={{ fontWeight: 500 }}>Cart</Link>
         {userInfo ? (
           <>
             <Link to="/orders">Orders</Link>
             <span style={{ color: '#888' }}>{userInfo.name}</span>
-            <button onClick={handleLogout}
-              style={{ background: '#f3f4f6', color: '#374151', padding: '6px 14px' }}>
-              Logout
-            </button>
+            <button onClick={handleLogout} style={{ background: '#f3f4f6', color: '#374151', padding: '6px 14px' }}>Logout</button>
           </>
         ) : (
           <>
             <Link to="/login">Login</Link>
-            <Link to="/register">
-              <button style={{ background: '#4f46e5', color: '#fff', padding: '6px 14px' }}>
-                Register
-              </button>
-            </Link>
+            <Link to="/register"><button style={{ background: '#4f46e5', color: '#fff', padding: '6px 14px' }}>Register</button></Link>
           </>
         )}
       </div>
